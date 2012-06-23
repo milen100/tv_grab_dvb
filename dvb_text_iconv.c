@@ -100,7 +100,7 @@ char *xmlify(const char *s) {
 	size_t ret = iconv(cd, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
 	if (ret == (size_t)-1) {
 		fprintf(stderr, "iconv() failed: %s\n", strerror(errno));
-		exit(1); // FIXME: handle errors
+		// exit(1); // FIXME: handle errors
 	} // if
 
 	// Luckily '&<> are single byte character sequences in UTF-8 and no
