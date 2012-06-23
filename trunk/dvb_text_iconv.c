@@ -98,9 +98,13 @@ char *xmlify(const char *s) {
 	char *outbuf = (char *)buf;
 	size_t outbytesleft = sizeof(buf);
 	size_t ret = iconv(cd, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
+	if (ret == (size_t)-1) {
+		fprintf(stderr, "iconv() failed: %s\n", strerror(errno));
+		exit(1);
+	} // if
 	// FIXME: handle errors
 
-	// Luckiely '&<> are single byte character sequences in UTF-8 and no
+	// Luckily '&<> are single byte character sequences in UTF-8 and no
 	// other character will have a UTF-8 sequence containing these
 	// patterns. Because the MSB is set in all multi-byte sequences, we can
 	// simply scan for '&<> and don't have to parse UTF-8 sequences.
