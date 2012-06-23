@@ -22,7 +22,7 @@ static int encoding_fixed(char *t, const char **s, const char *d) {
 	return 0;
 }
 static int encoding_variable(char *t, const char **s, const char *d) {
-	int i = ((unsigned char)*s[1] << 8) +  (unsigned char)*s[2];
+	int i = ((unsigned char)(*s)[1] << 8) +  (unsigned char)(*s)[2];
 	snprintf(t, 16, d, i);
 	*s += 3;
 	return 0;
