@@ -144,6 +144,11 @@ char *xmlify(const char *s) {
 			case 0x000B ... 0x001F:
 			case 0x007F:
 				fprintf(stderr, "Forbidden char %02x\n", *b);
+				// Add break; in order to remove(not copy to outbuf) the invalid chars.
+				// This solved the problem ot XML parsers not importing the EPG file.
+				// True at least for the Stalker import procedure.
+				// Tested on DCB-S Turksat with param -e iso8859-9 to specfy correct encoding
+				break;
 			default:
 				*r++ = *b;
 				break;
